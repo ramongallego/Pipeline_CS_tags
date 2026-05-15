@@ -20,7 +20,7 @@ samples |>
   mutate(seqs = map(files, ~fasta_reader(file.path(fastas.path, .x))))-> samples
 
 samples |> 
-  inner_join(sample_trans, join_by = c("fastq_header", "locus")) |> 
+  inner_join(sample_trans, by =  c("fastq_header", "locus")) |> 
   select(-fastq_header, -files) -> samples
 
 samples |>

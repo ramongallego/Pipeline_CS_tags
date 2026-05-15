@@ -229,3 +229,30 @@ bind_rows(summary.good, discarded|>
 
 } else {write_csv(summary.good, file.path(params$folder, "summary_dada2.csv"))}
 
+summary <- read_csv(file = file.path(params$folder, "summary.csv"))
+
+summary_dada <- read_csv(file=file.path(params$folder, "summary_dada2.csv") )
+
+
+summary_dada |>
+  pivot_longer(cols=where(~is.numeric(.x)),
+               values_to = "nReads") |>
+  mutate(direction=case_when(str_detect(name, "F$|F1s$|F2s$") ~ "Fwd",
+                             str_detect(name, "R$|R1s$|R2s$") ~ "Rev",
+                             TRUE                             ~ "both")) |>  
+  mutate (step = case_when(str_starts(name,  "filtered")      ~ "4.filtering",
+                           str_starts(name,  "dada")          ~ "5.dadaing",
+                           str_starts(name,  "merg")          ~ "6.merging",
+                           str_starts(name,  "joined")        ~ "7.reorienting",
+                           str_starts(name,  "nochim")        ~ "8.chimera")) |> 
+  filter (!is.na(step)) |> 
+  replace_na(list(nReads=0)) |> 
+  group_by(Sample , fastq_header, locus,direction,step) |> 
+  arrange(desc(nReads)) |> 
+  dplyr::slice(1) |> 
+  bind_rows(summary) -> summary
+
+summary |> 
+  ggplot(aes(x=step, y = nReads, fill= direction))+
+  geom_col() -> p
+ggsave(file.path(params$folder, "pipeline_summary.png"), p, width = 8, height = 6)

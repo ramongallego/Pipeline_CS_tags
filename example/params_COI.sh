@@ -93,8 +93,8 @@ LENR2=160
 # barcodes.fasta, summary.csv and pcr_primers.fasta; and the folder /demultiplexed
 # so the pipeline can cp all necessary files
 
-ALREADY_DEMULTIPLEXED="NO"
-DEMULT_OUTPUT=""
+ALREADY_DEMULTIPLEXED="YES"
+DEMULT_OUTPUT="${MAIN_DIR}"/test/demultiplexed_20260515_1105
 
 
 ################################################################################
@@ -102,7 +102,7 @@ DEMULT_OUTPUT=""
 ################################################################################
 # Would you like to save every single intermediate file as we go? YES | NO
 # recommendation: NO, unless testing or troubleshooting
-HOARD="YES"
+HOARD="NO"
 
 # Would you like to compress extraneous intermediate files once the analysis is finished? YES/NO
 PERFORM_CLEANUP="YES"

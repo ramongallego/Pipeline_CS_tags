@@ -22,7 +22,7 @@ suppressPackageStartupMessages({
   library (dada2)
   library (Biostrings)
   library (digest)
-  library (insect)
+  library (eDNAfuns)
   library (tictoc)
 })
 

@@ -6,7 +6,7 @@
 ################################################################################
 # What is the file path to the directory containing all of the libraries/reads?
 
-PARENT_DIR="${MAIN_DIR}"/example
+PARENT_DIR="${MAIN_DIR}"/data
 
 # Where is the sequencing metadata file? (SEE FORMATTING GUIDELINES IN README!)
 SEQUENCING_METADATA="${PARENT_DIR}"/metadata.csv
@@ -33,15 +33,11 @@ COLNAME_SAMPLE_ID="Sample"
 # Your metadata must have a column corresponding to the subfolders containing the raw reads.
 # In order to make this flexible across both multiple and single library preps, you must include this even if you only sequenced one library (sorry!).
 COLNAME_ID1_NAME="pri_index_name"
-COLNAME_INSERT_SIZE="insert_size"
-
 
 ################################################################################
 # DEMULTIPLEXING
 ################################################################################
 
-# Do the reads contain index sequences which identifies their sample of origin?
-SECONDARY_INDEX="YES"
 
 # Specify the nucleotide sequences that differentiate multiplexed samples
 # (sometimes, confusingly referred to as "tags" or "barcodes")
@@ -93,8 +89,8 @@ LENR2=160
 # barcodes.fasta, summary.csv and pcr_primers.fasta; and the folder /demultiplexed
 # so the pipeline can cp all necessary files
 
-ALREADY_DEMULTIPLEXED="YES"
-DEMULT_OUTPUT="${MAIN_DIR}"/test/demultiplexed_20260515_1105
+ALREADY_DEMULTIPLEXED="NO"
+DEMULT_OUTPUT=""
 
 
 ################################################################################
@@ -104,5 +100,3 @@ DEMULT_OUTPUT="${MAIN_DIR}"/test/demultiplexed_20260515_1105
 # recommendation: NO, unless testing or troubleshooting
 HOARD="NO"
 
-# Would you like to compress extraneous intermediate files once the analysis is finished? YES/NO
-PERFORM_CLEANUP="YES"

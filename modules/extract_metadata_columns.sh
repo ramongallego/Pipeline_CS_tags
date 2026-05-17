@@ -7,7 +7,6 @@ echo "Resolving metadata column numbers..."
 COLNUM_FILE1=$(      get_colnum "${COLNAME_FILE1}"       "${SEQUENCING_METADATA}")
 COLNUM_FILE2=$(      get_colnum "${COLNAME_FILE2}"       "${SEQUENCING_METADATA}")
 COLNUM_ID1=$(        get_colnum "${COLNAME_ID1_NAME}"    "${SEQUENCING_METADATA}")
-COLNUM_ID1_SEQ=$(    get_colnum "${COLNAME_ID1_SEQ}"     "${SEQUENCING_METADATA}")
 COLNUM_ID2=$(        get_colnum "${COLNAME_ID2_SEQ}"     "${SEQUENCING_METADATA}")
 COLNUM_ID2_R=$(      get_colnum "${COLNAME_ID2_SEQ_R}"   "${SEQUENCING_METADATA}")
 COLNUM_ID2_NAME=$(   get_colnum "${COLNAME_ID2_NAME}"    "${SEQUENCING_METADATA}")

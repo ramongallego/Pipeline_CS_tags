@@ -6,7 +6,7 @@
 ################################################################################
 # What is the file path to the directory containing all of the libraries/reads?
 
-PARENT_DIR="${MAIN_DIR}"/example
+PARENT_DIR="${MAIN_DIR}"/data
 
 # Where is the sequencing metadata file? (SEE FORMATTING GUIDELINES IN README!)
 SEQUENCING_METADATA="${PARENT_DIR}"/metadata.csv
@@ -33,12 +33,11 @@ COLNAME_SAMPLE_ID="Sample"
 # Your metadata must have a column corresponding to the subfolders containing the raw reads.
 # In order to make this flexible across both multiple and single library preps, you must include this even if you only sequenced one library (sorry!).
 COLNAME_ID1_NAME="pri_index_name"
-COLNAME_INSERT_SIZE="insert_size"
-
 
 ################################################################################
 # DEMULTIPLEXING
 ################################################################################
+
 
 # Specify the nucleotide sequences that differentiate multiplexed samples
 # (sometimes, confusingly referred to as "tags" or "barcodes")
@@ -86,13 +85,12 @@ LENR2=160
 # Would you like to pick up where a previous analysis left off?
 
 # Have you already demultiplexed your reads into .1 and .2 pairs per sample.
-# You also need to have completed the primer removal step, and have the output files
 # Point towards the output folder (must include files: sample_trans.tmp,
-# barcodes.fasta, summary.csv and pcr_primers.fasta; and the folder /noprimers
+# barcodes.fasta, summary.csv and pcr_primers.fasta; and the folder /demultiplexed
 # so the pipeline can cp all necessary files
 
 ALREADY_DEMULTIPLEXED="NO"
-DEMULT_OUTPUT="${MAIN_DIR}"/test/demultiplexed_20260514_1127
+DEMULT_OUTPUT=""
 
 
 ################################################################################
@@ -100,7 +98,5 @@ DEMULT_OUTPUT="${MAIN_DIR}"/test/demultiplexed_20260514_1127
 ################################################################################
 # Would you like to save every single intermediate file as we go? YES | NO
 # recommendation: NO, unless testing or troubleshooting
-HOARD="YES"
+HOARD="NO"
 
-# Would you like to compress extraneous intermediate files once the analysis is finished? YES/NO
-PERFORM_CLEANUP="YES"

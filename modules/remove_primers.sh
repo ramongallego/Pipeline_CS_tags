@@ -35,21 +35,17 @@ for (( i=0; i < NFILE1; i++ )); do
     primers_Fwd="${BARCODES_DIR}/primers_${ID1S}_Fwd.fasta"
     primers_Rev="${BARCODES_DIR}/primers_${ID1S}_Rev.fasta"
 
-    awk -F',' -v CF="$COLNUM_FILE1" -v VAL="${FILE1[i]}" \
-              -v LOCUS="$COLNUM_LOCUS" \
-              -v FWD="$COLNUM_PRIMER1" \
-              -v REV="$COLNUM_PRIMER2" \
-        'NR>1 && $CF==VAL {
-            printf ">Locus_%s_Fwd\n%s\n", $LOCUS, $FWD
-        }' "${SEQUENCING_METADATA}" | sort -u > "${primers_Fwd}"
+   awk -F',' -v CF="$COLNUM_FILE1" -v VAL="${FILE1[i]}" \
+          -v LOCUS="$COLNUM_LOCUS" -v FWD="$COLNUM_PRIMER1" \
+    'NR>1 && $CF==VAL { print $LOCUS, $FWD }' \
+    "${SEQUENCING_METADATA}" | sort -u | \
+awk '{ printf ">Locus_%s_Fwd\n%s\n", $1, $2 }' > "${primers_Fwd}"
 
-    awk -F',' -v CF="$COLNUM_FILE1" -v VAL="${FILE1[i]}" \
-              -v LOCUS="$COLNUM_LOCUS" \
-              -v FWD="$COLNUM_PRIMER1" \
-              -v REV="$COLNUM_PRIMER2" \
-        'NR>1 && $CF==VAL {
-            printf ">Locus_%s_Rev\n%s\n", $LOCUS, $REV
-        }' "${SEQUENCING_METADATA}" | sort -u > "${primers_Rev}"
+awk -F',' -v CF="$COLNUM_FILE1" -v VAL="${FILE1[i]}" \
+          -v LOCUS="$COLNUM_LOCUS" -v REV="$COLNUM_PRIMER2" \
+    'NR>1 && $CF==VAL { print $LOCUS, $REV }' \
+    "${SEQUENCING_METADATA}" | sort -u | \
+awk '{ printf ">Locus_%s_Rev\n%s\n", $1, $2 }' > "${primers_Rev}"
 
     # ── Loop 1: CS1 on R1 → Fwd primer on R1 ────────────────────────────────
     n=0

@@ -26,3 +26,6 @@ Checking whether you have the right R packages installed before running R is com
 * digest
 * eDNAfuns
 * tictoc
+
+### Authors
+Made by Robert Cassidy and Ramón Gallego

@@ -18,10 +18,10 @@ fi
 
 echo "Tidying vsearch summary files..."
  
-Rscript "${MODULE_DIR}/clustering/tidy_vsearch_summary.R" "${OUTPUT_DIR}"
+Rscript "${MODULE_DIR}/clustering/tidy_vsearch_summary.r" "${OUTPUT_DIR}"
  
 if [[ $? -ne 0 ]]; then
-    echo "ERROR: tidy_vsearch_summary.R failed. Aborting." >&2
+    echo "ERROR: tidy_vsearch_summary.r failed. Aborting." >&2
     exit 1
 fi
 echo ""

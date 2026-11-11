@@ -72,8 +72,8 @@ SECONDARY_SWARM="YES"
 ### Truncation lengths after primer removal (DADA2 truncLen, UNOISE cutadapt -l / -L)
 # For MiFish with 2x150 reads: R1 keeps ~129 bp after the primer, R2 ~123 bp,
 # and the amplicon is ~165-185 bp, so 120 + 110 leaves ~50 bp of overlap.
-LENR1=120
-LENR2=110
+LENR1=100
+LENR2=95
 
 ################################################################################
 # REANALYSIS
@@ -93,5 +93,5 @@ DEMULT_OUTPUT=""
 ################################################################################
 # Would you like to save every single intermediate file as we go? YES | NO
 # recommendation: NO, unless testing or troubleshooting
-HOARD="NO"
+HOARD="YES"
 

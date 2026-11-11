@@ -30,7 +30,7 @@ suppressPackageStartupMessages({
 as_list <- function(x) if (is.list(x) && !inherits(x, c("dada", "derep", "data.frame"))) x else list(x)
 
 sample.map <- read_delim(file.path(params$folder, "sample_trans.tmp"),
-                         delim = "\t", show_col_types = FALSE)
+                         delim = "\t", show_col_types = FALSE,col_types = cols(.default = col_character()))
 print("The sample map looks like this")
 head(sample.map)
 

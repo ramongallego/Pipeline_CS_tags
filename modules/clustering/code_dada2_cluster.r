@@ -232,7 +232,7 @@ bind_rows(summary.good, discarded|>
 
 summary <- read_csv(file = file.path(params$folder, "summary.csv"))
 
-summary_dada <- read_csv(file=file.path(params$folder, "summary_dada2.csv") )
+summary_dada <- read_csv(file=file.path(params$folder, "summary_dada2.csv"), col_types=cols(locus = "c"))
 
 
 summary_dada |>

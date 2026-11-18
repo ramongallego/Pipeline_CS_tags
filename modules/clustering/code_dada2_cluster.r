@@ -29,6 +29,7 @@ suppressPackageStartupMessages({
 
 sample.map <- read_delim(file.path(params$folder,"/sample_trans.tmp"),
                           show_col_types = FALSE,
+                         col_types = cols(.default = col_character()),
                           delim = "\t")
 print("The sample map looks like this")
 head (sample.map)
@@ -40,7 +41,7 @@ path1 <- params$fastqs
 ## ----listing files------------------------------------------------------------
 files.noprimers <- tibble (files = list.files(path1, full.names = TRUE))
 
-print("These are the demulted files")
+print("These are the no primers files")
 files.noprimers
 
 files.noprimers |> 
@@ -231,7 +232,7 @@ bind_rows(summary.good, discarded|>
 
 summary <- read_csv(file = file.path(params$folder, "summary.csv"))
 
-summary_dada <- read_csv(file=file.path(params$folder, "summary_dada2.csv") )
+summary_dada <- read_csv(file=file.path(params$folder, "summary_dada2.csv"), col_types=cols(locus = "c"))
 
 
 summary_dada |>

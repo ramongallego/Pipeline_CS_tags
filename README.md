@@ -33,6 +33,26 @@ I would start by creating a metadata file in which, for each sample you fill in 
 
 Then run the job with bash <path_to_pipeline>/run_pipeline.sh <path_to_parameters_file>
 
+### Libraries without CS tags (ILLUMINA mode)
+
+If samples were multiplexed only with Illumina i5/i7 indices, the sequencer already delivers one R1/R2 pair per sample, with the Fwd primer on R1 and the Rev primer on R2. Set `LIBRARY_PREP="ILLUMINA"` in the parameters file (see `data/params_illumina_MiFish.sh`) and the pipeline skips demultiplexing and goes straight to primer removal, then to the clustering you choose. Parameter files without `LIBRARY_PREP` keep running the CS route exactly as before.
+
+Metadata: one row per sample and locus, with at least these columns (names are set in the parameters file):
+
+| column | example | notes |
+|---|---|---|
+| sample | `CWH_2603_01_R1` | letters, digits, `.` `_` `-`; sample + locus must be unique |
+| PrimerF / PrimerR | `GYCGGTAAAACTCGTGCCAGC` | IUPAC codes allowed; inosine (I) is read as N |
+| locus | `MiFish` | no underscores |
+| file1 / file2 | `..._1.fq` / `..._2.fq` | relative to `PARENT_DIR`; one pair of files per sample |
+
+Primer removal in this mode:
+1. cuts Nextera and TruSeq adapter read-through from the 3' end;
+2. removes the primers with one linked adapter per locus (`^PrimerF...revcomp(PrimerR)` on R1, `^PrimerR...revcomp(PrimerF)` on R2). Pairs without both primers at the start of the reads are discarded;
+3. drops pairs where either read is shorter than `MIN_LENGTH` (default 50), which removes primer dimers.
+
+DADA2 uses its own script in this mode (`code_dada2_cluster_illumina.r`), with two error models instead of four. UNOISE and swarm use the same scripts as the CS route.
+
 ### Output
 
 Depending on the options chosen, the output would be either an ASV table or an OTU table. Either way, the basic output files are:
